@@ -1,235 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  @foreach( $settings as $setting )
-  <!-- App Title -->
-  <title>@yield('title') | {{ $setting->title }}</title>
-
-  <!-- App favicon -->
-  <link rel="shortcut icon" href="{{ asset('/uploads/setting/'.$setting->favicon_path) }}">
-  <meta name="description" content="C5K Academic Research Publishing is a leading global publication dedicated to in-depth quantitative and qualitative analysis, industry insights, and professional resources to help institutions and academic researchers push the boundaries of innovative approches and their excellencies">
-  <meta name="keywords" content="{{ $setting->keywords }}">
-  @endforeach
-
-  @if(empty($setting))
-  <!-- App Title -->
-  <title>@yield('title')</title>
-  @endif
-
-  <!-- Bootstrap core CSS -->
-  <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet">
-  <!-- Font Awesome CSS -->
-  <link href="{{ asset('frontend/css/font-awesome.min.css') }}" rel="stylesheet">
-  <!-- Jasny CSS -->
-  <link href="{{ asset('frontend/css/jasny-bootstrap.min.css') }}" rel="stylesheet">
-  <!-- Animate CSS -->
-  <link href="{{ asset('frontend/css/animate.css') }}" rel="stylesheet">
-  <!-- Code CSS -->
-  <link href="{{ asset('frontend/css/tomorrow-night.css') }}" rel="stylesheet" />
-  <!-- Gallery CSS -->
-  <link href="{{ asset('frontend/css/bootstrap-gallery.css') }}" rel="stylesheet">
-  <!-- ColorBox CSS -->
-  <link href="{{ asset('frontend/css/colorbox.css') }}" rel="stylesheet">
-
-  <!-- Custom font -->
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Roboto+Slab&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-
-  <!-- Custom styles for this template -->
-  <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <title>C5K</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{{ asset('frontEndArea/main.css') }}">
 
 </head>
+
+<style>
+    .logo_area a img {
+        height: 60px;
+        margin-left: 20px
+    }
+</style>
+
 <body>
-  <div class="page-loader">
-    <div class="loader-in">Loading...</div>
-    <div class="loader-out">Loading...</div>
-  </div>
+    <header class="sticky top-0 z-40 shadow-lg shadow-white-500/50">
 
-  <div class="canvas">
-    <div class="canvas-overlay"></div>
-    <header>
-      <nav class="navbar navbar-fixed-top navbar-laread">
-        <div class="container">
-          <div class="navbar-header">
-            @if(isset($setting))
-            <a class="navbar-brand" href="{{ URL('/') }}"><img height="164" src="{{ asset('/uploads/setting/'.$setting->logo_path) }}" alt="logo"></a>
-            @endif
-          </div>
-
-          <!-- Authentication Links -->
-          @guest
-          <a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
-            <i class="fa fa-user"></i>
-          </a>
-          @else
-          <a href="{{ URL('/dashboard') }}" target="_blank" class="modal-form">
-            <i class="fa fa-user"></i>
-          </a>
-          @endguest
-
-
-          <button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
-            <span class="sr-only">Toggle navigation</span>
-            <i class="fa fa-plus"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="main-nav">
-            <ul class="nav navbar-nav">
-              <li class="{{ Request::path() == '/' ? 'active' : '' }}">
-                <a href="{{ URL('/') }}">HOME</a>
-              </li>
-              <li class="{{ Request::is('article*') ? 'active' : '' }}">
-                <a href="{{ URL('/articles') }}" class="dropdown-toggle" role="button" aria-expanded="false">Articles</a>
-                <ul class="dropdown-menu" role="menu">
-                @if(isset($article_submenus))
-                  @foreach( $article_submenus as $article_submenu )
-                  <li>
-                    <a href="{{ URL('/article/category/'.$article_submenu->id) }}">
-                      {{ $article_submenu->title }}
+        <nav class=" bg-gray-900 text-white p-3">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <!-- Left: Show C5K.com Always, Hide Other Links on Mobile -->
+                <div class="flex space-x-4">
+                    <a href="#" class="flex text-xs items-center hover:text-gray-400">
+                        <span class="mr-1 "></span>C5K.com
                     </a>
-                  </li>
-                  @endforeach
-                @endif
-                </ul>
-              </li>
-              <li class="{{ Request::is('author*') ? 'active' : '' }}">
-                <a href="{{ URL('/authors') }}">Authors</a>
-              </li>
-              <li class="{{ Request::path() == 'requirement' ? 'active' : '' }}">
-                <a href="{{ URL('/requirement') }}">Requirements</a>
-              </li>
-              <li class="{{ Request::path() == 'contact' ? 'active' : '' }}">
-                <a href="{{ URL('/contact') }}">Contact</a>
-              </li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </nav>
+                    <a href="#" class="hover:text-gray-400 hidden md:inline text-xs">C5K.co</a>
+                    <a href="#" class="hover:text-gray-400 hidden md:inline text-xs">C5K.ec</a>
+                    <a href="#" class="hover:text-gray-400 hidden md:inline text-xs">C5K.nl</a>
+                    <a href="#" class="hover:text-gray-400 hidden md:inline text-xs">More Sites</a>
+                </div>
+
+                <!-- Right: Show JOIN C5K Always, Hide Other Links on Mobile -->
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-gray-400 hidden md:inline text-xs">Membership</a>
+                    <a href="#" class="hover:text-gray-400 hidden md:inline text-xs">Sign In</a>
+                    <a href="#" class="hover:text-gray-400 font-bold text-xs">JOIN C5K</a>
+                </div>
+            </div>
+        </nav>
+        <nav class=" bg-[#FFFFFF]">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <!-- Left: Logo -->
+                <div class="logo_area">
+                    <a class="" href="{{ route('home') }}">
+                        <img src="{{ asset('public/backend/logo/logo.png') }}" alt="logo">
+                    </a>
+                </div>
+
+                <!-- Center: Navigation Links (Hidden on Small Screens) -->
+
+
+                <!-- Right: Social Icons & Mobile Menu Toggle -->
+                <div class="flex items-center space-x-4">
+                    <!-- Social Icons -->
+                    <a href="#" class="text-[#007C92] text-xl "><i class="fab fa-facebook"></i></a>
+                    {{-- <a href="#" class="text-white text-xl hover:text-gray-200"><i class="fab fa-x"></i></a> --}}
+                    <a href="#" class="text-[#007C92] text-xl "><i class="fab fa-linkedin"></i></a>
+
+                    <!-- Mobile Menu Toggle -->
+
+                </div>
+            </div>
+
+        </nav>
+
+        <nav class="bg-[#007C92] shadow-lg  ">
+            <div class="max-w-7xl mx-auto flex justify-center items-center">
+
+                <div class="hidden  md:flex space-x-12 text-white font-bold p-4 text-lg">
+                    <a href="{{ route('home') }}" class="hover:text-gray-200 transition">Home</a>
+                    <a href="{{ route('about') }}" class="hover:text-gray-200 transition">About</a>
+                    <a href="{{ route('academic.journal') }}" class="hover:text-gray-200 transition">Academic
+                        Journals</a>
+                    <a href="{{ route('dissertation.thesis') }}"
+                        class="hover:text-gray-200 transition">Dissertation/Thesis</a>
+                    <a href="{{ route('books') }}" class="hover:text-gray-200 transition">Books</a>
+                    <a href="{{ route('conferences') }}" class="hover:text-gray-200 transition">Conferences</a>
+                    <a href="{{ route('home.news') }}" class="hover:text-gray-200 transition">Announcements</a>
+                </div>
+
+                <!-- Right: Social Icons & Mobile Menu Toggle -->
+                <button id="menu-toggle" class="md:hidden text-white focus:outline-none text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu"
+                class="hidden md:hidden bg-[#007C92] text-white flex flex-col space-y-2 mt-2 p-4 rounded-lg">
+                <a href="{{ route('home') }}" class="hover:text-gray-200 transition">Home</a>
+                <a href="{{ route('about') }}" class="hover:text-gray-200 transition">About</a>
+                <a href="{{ route('academic.journal') }}" class="hover:text-gray-200 transition">Academic
+                    Journals</a>
+                <a href="{{ route('dissertation.thesis') }}"
+                    class="hover:text-gray-200 transition">Dissertation/Thesis</a>
+                <a href="{{ route('books') }}" class="hover:text-gray-200 transition">Books</a>
+                <a href="{{ route('conferences') }}" class="hover:text-gray-200 transition">Conferences</a>
+                <a href="{{ route('home.news') }}" class="hover:text-gray-200 transition">Announcements</a>
+            </div>
+        </nav>
     </header>
 
 
-      <!-- Content Start -->
-      @yield('content')
-      <!-- Content End -->
- 
+    @yield('userContent')
 
-    <footer class="container-fluid footer">
-      <div class="container text-center">
-        @if(isset($setting))
-        <div class="footer-logo"><img src="{{ asset('/uploads/setting/'.$setting->logo_path) }}" alt="logo"></div>
-        @endif
-
-        <p class="laread-motto">
-          @if(isset($settings))
-            @foreach( $settings as $setting )
-              © {!! $setting->footer_text !!}
-            @endforeach
-          @endif
-        </p>
-        <div class="laread-social">
-        @if(isset($socials))
-          @foreach( $socials as $social )
-            @if(isset($social->facebook))
-            <a href="{{ $social->facebook }}" target="_blank"><i class="fa fa-facebook"></i></a>
-            @endif
-            @if(isset($social->twitter))
-            <a href="{{ $social->twitter }}" target="_blank"><i class="fa fa-twitter"></i></a>
-            @endif
-            @if(isset($social->linkedin))
-            <a href="{{ $social->linkedin }}" target="_blank"><i class="fa fa-linkedin"></i></a>
-            @endif
-            @if(isset($social->instagram))
-            <a href="{{ $social->instagram }}" target="_blank"><i class="fa fa-instagram"></i></a>
-            @endif
-            @if(isset($social->pinterest))
-            <a href="{{ $social->pinterest }}" target="_blank"><i class="fa fa-pinterest"></i></a>
-            @endif
-            @if(isset($social->youtube))
-            <a href="{{ $social->youtube }}" target="_blank"><i class="fa fa-youtube-play"></i></a>
-            @endif
-          @endforeach
-        @endif
+    <footer class="bg-blue-800 text-white py-8 mt-10">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-sm px-6">
+            <div>
+                <h2 class="font-bold">ABOUT C5K</h2>
+                <a href="#" class="block mt-2 hover:text-gray-300">Learn more about C5K</a>
+                <a href="{{ route('mission.vission') }}" class="block hover:text-gray-300">Mission & Vision</a>
+            </div>
+            <div>
+                <h2 class="font-bold">LOCATION</h2>
+                <p class="mt-2">761 STATE HIGHWAY 100</p>
+                <p>Port Isabel, TX 78578 USA</p>
+                <a href="#" class="block mt-2 hover:text-gray-300">Contact & Support</a>
+            </div>
+            <div>
+                <h2 class="font-bold">GET INVOLVED</h2>
+                <a href="#" class="block mt-2 hover:text-gray-300">Conference</a>
+                <a href="#" class="block hover:text-gray-300">Societies</a>
+                <a href="#" class="block hover:text-gray-300">Technical career</a>
+                <a href="#" class="block hover:text-gray-300">Scholarship</a>
+            </div>
+            <div>
+                <h2 class="font-bold">RESOURCES</h2>
+                <a href="#" class="block mt-2 hover:text-gray-300">Author guideline</a>
+                <a href="#" class="block hover:text-gray-300">Paper format download</a>
+                <a href="#" class="block hover:text-gray-300">Submit Article</a>
+                <a href="#" class="block hover:text-gray-300">Book publishing</a>
+                <a href="#" class="block hover:text-gray-300">Thesis/Dissertation</a>
+            </div>
         </div>
-      </div>
+        <div class="bg-gray-900 text-center text-sm py-4 mt-4 px-4">
+            &copy; Copyright 2024 C5K â€“ All rights reserved. A not-for-profit organization, C5K is the world's largest
+            technical professional organization dedicated to advancing technology for the benefit of humanity.
+        </div>
     </footer>
-  </div>
 
+    <script>
+        document.getElementById("menu-toggle").addEventListener("click", function() {
+            document.getElementById("mobile-menu").classList.toggle("hidden");
+        });
+    </script>
 
-  <!-- Login Modal -->
-  <div class="modal leread-modal fade" id="login-form" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content" id="login-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title"><i class="fa fa-unlock-alt"></i>Sign In</h4>
-        </div>
-        <div class="modal-body">
-          <form method="POST" action="{{ route('login') }}">
-            @csrf
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    @stack('scripts')
 
-            <div class="form-group">
-              <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-              @error('email')
-                  <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
-              @enderror
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-              @error('password')
-                  <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
-              @enderror
-            </div>
-            <div class="linkbox">
-              @if (Route::has('password.request'))
-                  <a href="{{ route('password.request') }}">
-                      {{ __('Forgot password ?') }}
-                  </a>
-              @endif
-
-              @if (Route::has('register'))
-              <span>No account ?  <a href="{{ route('register') }}">Sign Up</a></span>
-              @endif
-              
-              <span class="form-warning"><i class="fa fa-exclamation"></i>Fill the require.</span>
-            </div>
-            <div class="linkbox">
-              <label><input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}><span>Remember me</span><i class="fa"></i></label>
-              <button type="submit" class="btn btn-golden btn-signin">SIGN IN</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bootstrap core JavaScript
-  ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="{{ asset('frontend/js/jquery.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/jasny-bootstrap.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/prettify.js') }}"></script>
-  <script src="{{ asset('frontend/js/lang-css.js') }}"></script>
-  <script src="{{ asset('frontend/js/jquery.blueimp-gallery.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/imagesloaded.js') }}"></script>
-  <script src="{{ asset('frontend/js/masonry.js') }}"></script>
-  <script src="{{ asset('frontend/js/viewportchecker.js') }}"></script>
-  <script src="{{ asset('frontend/js/isotope.pkgd.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/jquery.ellipsis.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/jquery.dotdotdot.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/jquery.colorbox-min.js') }}"></script>
-  <script src="{{ asset('frontend/js/jquery.nicescroll.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/calendar.js') }}"></script>
-  <script src="{{ asset('frontend/js/jquery.touchSwipe.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/script.js') }}"></script>
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-@extends('layouts.masterFrontend')
+@extends('./layouts.master')
 @section('userContent')
     <!-- Include Swiper CSS -->
 
@@ -11,7 +11,7 @@
                 @foreach ($banners as $key => $banner)
                     <!-- Slide 1 -->
                     <div class="swiper-slide">
-                        <img src="{{ asset('/backend/banner/' . $banner->banner) }}" class="w-full rounded-lg"
+                        <img src="{{ asset('/backend/banner/' . $banner->banner) }}" class="w-full h-[200px] rounded-lg"
                             alt="{{ $banner->first_heading }}" />
                     </div>
                 @endforeach

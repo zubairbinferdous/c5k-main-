@@ -29,7 +29,7 @@
                 <!-- Left: Show C5K.com Always, Hide Other Links on Mobile -->
                 <div class="flex space-x-4">
                     <a href="#" class="flex text-xs items-center hover:text-gray-400">
-                        <span class="mr-1 ">🏠</span>C5K.com
+                        <span class="mr-1 "></span>C5K.com
                     </a>
                     <a href="#" class="hover:text-gray-400 hidden md:inline text-xs">C5K.co</a>
                     <a href="#" class="hover:text-gray-400 hidden md:inline text-xs">C5K.ec</a>
@@ -45,19 +45,36 @@
                 </div>
             </div>
         </nav>
-
-        <nav class="bg-[#007C92]  p-1 shadow-lg  ">
+        <nav class=" bg-[#FFFFFF]">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
                 <!-- Left: Logo -->
                 <div class="logo_area">
                     <a class="" href="{{ route('home') }}">
-                        <img src="{{ asset('/backend/logo/logo.png') }}" alt="logo">
+                        <img src="{{ asset('public/backend/logo/logo.png') }}" alt="logo">
                     </a>
                 </div>
 
                 <!-- Center: Navigation Links (Hidden on Small Screens) -->
-                <div
-                    class="hidden md:flex space-x-6 text-white font-medium absolute left-1/2 transform -translate-x-1/2">
+
+
+                <!-- Right: Social Icons & Mobile Menu Toggle -->
+                <div class="flex items-center space-x-4">
+                    <!-- Social Icons -->
+                    <a href="#" class="text-[#007C92] text-xl "><i class="fab fa-facebook"></i></a>
+                    {{-- <a href="#" class="text-white text-xl hover:text-gray-200"><i class="fab fa-x"></i></a> --}}
+                    <a href="#" class="text-[#007C92] text-xl "><i class="fab fa-linkedin"></i></a>
+
+                    <!-- Mobile Menu Toggle -->
+
+                </div>
+            </div>
+
+        </nav>
+
+        <nav class="bg-[#007C92] shadow-lg  ">
+            <div class="max-w-7xl mx-auto flex justify-center items-center">
+
+                <div class="hidden  md:flex space-x-12 text-white font-bold p-4 text-lg">
                     <a href="{{ route('home') }}" class="hover:text-gray-200 transition">Home</a>
                     <a href="{{ route('about') }}" class="hover:text-gray-200 transition">About</a>
                     <a href="{{ route('academic.journal') }}" class="hover:text-gray-200 transition">Academic
@@ -70,17 +87,10 @@
                 </div>
 
                 <!-- Right: Social Icons & Mobile Menu Toggle -->
-                <div class="flex items-center space-x-4">
-                    <!-- Social Icons -->
-                    <a href="#" class="text-white text-xl hover:text-gray-200"><i class="fab fa-facebook"></i></a>
-                    {{-- <a href="#" class="text-white text-xl hover:text-gray-200"><i class="fab fa-x"></i></a> --}}
-                    <a href="#" class="text-white text-xl hover:text-gray-200"><i class="fab fa-linkedin"></i></a>
+                <button id="menu-toggle" class="md:hidden text-white focus:outline-none text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
 
-                    <!-- Mobile Menu Toggle -->
-                    <button id="menu-toggle" class="md:hidden text-white focus:outline-none text-2xl">
-                        ☰
-                    </button>
-                </div>
             </div>
 
             <!-- Mobile Menu -->
@@ -88,7 +98,8 @@
                 class="hidden md:hidden bg-[#007C92] text-white flex flex-col space-y-2 mt-2 p-4 rounded-lg">
                 <a href="{{ route('home') }}" class="hover:text-gray-200 transition">Home</a>
                 <a href="{{ route('about') }}" class="hover:text-gray-200 transition">About</a>
-                <a href="{{ route('academic.journal') }}" class="hover:text-gray-200 transition">Academic Journals</a>
+                <a href="{{ route('academic.journal') }}" class="hover:text-gray-200 transition">Academic
+                    Journals</a>
                 <a href="{{ route('dissertation.thesis') }}"
                     class="hover:text-gray-200 transition">Dissertation/Thesis</a>
                 <a href="{{ route('books') }}" class="hover:text-gray-200 transition">Books</a>

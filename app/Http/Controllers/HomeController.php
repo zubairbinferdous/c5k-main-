@@ -83,16 +83,10 @@ class HomeController extends Controller
                 'articles.title as article_title',
                 'articles.description',
                 'journal_articals.id as journal_id',
-
-
                 'volume.id as volume_id',
-
-
-
             ) // Select necessary columns
 
             ->take(4)->get();
-
 
 
         return view('frontEnd', compact('banners', 'blogbanners', 'blogs', 'articles', 'news', 'journals', 'rows', 'journalsSLider'));
@@ -100,7 +94,6 @@ class HomeController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query');
-
         $journals = Journal::where('title', 'like', "%{$query}%")->get(['id', 'slug', 'title']);
         $articles = Article::where('title', 'like', "%{$query}%")->get(['id', 'title']);
         $news = News::where('title', 'like', "%{$query}%")->get(['id', 'title']);
