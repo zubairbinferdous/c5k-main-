@@ -50,7 +50,7 @@
                 <!-- Left: Logo -->
                 <div class="logo_area">
                     <a class="" href="{{ route('home') }}">
-                        <img src="{{ asset('public/backend/logo/logo.png') }}" alt="logo">
+                        <img src="{{ asset('/backend/logo/logo.png') }}" alt="logo">
                     </a>
                 </div>
 
